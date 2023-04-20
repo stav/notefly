@@ -1,10 +1,12 @@
+import asyncio
+
 from quart import Quart, render_template
 
 app = Quart(__name__)
 
-@app.get("/")
+@app.get('/')
 async def index():
-    return await render_template("index.html")
+    return await render_template("client.html")
 
 def run() -> None:
     app.run()
