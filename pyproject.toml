@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "notefly"
+version = "0.1.0"
+description = ""
+authors = ["Steven Almeroth <fedor@primesite.dev>"]
+readme = "README.md"
+packages = [{include = "notefly", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
