@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>NoteFly Client</title>
+    <script>
+      const brokerUrl = 'http://localhost:5001';
+
+      async function sendToBroker(event) {
+        const response = await fetch(brokerUrl, {
+          method: 'POST',
+          body: new FormData(event.target)
+        });
+        return await response.text();
+      }
+
+      function display(result) {
+        const messages = document.getElementById('messages');
+        const text = document.createTextNode(result);
+        const li = document.createElement('li');
+        li.appendChild(text);
+        messages.appendChild(li);
+      }
+    </script>
+  </head>
+  <body>
+    <header>Send a messaage</header>
+    <main>
+      <div style="display: flex; height: 100%; flex-direction: column">
+        <form onsubmit="sendToBroker(event).then(display); return false">
+          <select id="cats" name="catagory" title="Catagory">
+            <option>Sports</option>
+            <option>Finance</option>
+            <option>Movies</option>
+          </select>
+          <input type="text" name="message" minlength="1" />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </main>
+    <footer>
+        <ul id="messages" style="flex-grow: 1; list-style-type: none"></ul>
+    </footer>
+  </body>
+</html>
