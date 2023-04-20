@@ -8,6 +8,7 @@ packages = [{include = "notefly", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+quart = "^0.18.4"
 
 [build-system]
 requires = ["poetry-core"]
