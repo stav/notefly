@@ -10,9 +10,15 @@ packages = [{include = "notefly", from = "src"}]
 python = "^3.10"
 quart = "^0.18.4"
 
+[tool.poetry.group.dev.dependencies]
+pytest-asyncio = "^0.21.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 start = "chat:run"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
