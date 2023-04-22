@@ -12,13 +12,29 @@
 	$ poetry add quart quart-cors
 	$ poetry add --dev pytest-asyncio
 
+## Usage
+
+Start two (2) microservices:
+
+If you have `nodemon`:
+
+1. `$ nodemon --watch ./src/ --exec "poetry run client" src/notefly/client.py`
+2. `$ nodemon --watch ./src/ --exec "poetry run broker" src/notefly/broker.py`
+
+otherwise:
+
+1. `$ poetry run client`
+2. `$ poetry run broker`
+
 ## Specification
 
 ### Functional Requirements
 
 * Log every notification dispatched, delivered, opened, seen, unsuccessful, canceled
 * Three catagories: Sports, Finance, Movies
-* Three types of: SMS, e-mail, push
+* Three types: SMS, e-mail, push
+* Users can subscribe to categories
+* Users can select which message types they want to receive
 
 ### Non-Functional Requirements
 

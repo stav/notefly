@@ -20,7 +20,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 chat = "chat:run"
-queue = "notefly:queue"
+broker = "notefly:broker"
 client = "notefly:client"
 
 [tool.pytest.ini_options]
