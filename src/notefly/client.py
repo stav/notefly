@@ -9,4 +9,4 @@ async def index():
     return await render_template("client.html")
 
 def run() -> None:
-    app.run()
+    app.run(port=5000)
