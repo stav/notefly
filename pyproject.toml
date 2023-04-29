@@ -20,7 +20,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 client = "notefly.client:run"
-message = "notefly.message:run"
+broker = "notefly.broker:run"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

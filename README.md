@@ -41,12 +41,12 @@ Start two (2) microservices:
 If you have `nodemon`:
 
 1. `$ nodemon --watch ./src/ --exec "poetry run client" src/notefly/client.py`
-2. `$ nodemon --watch ./src/ --exec "poetry run message" src/notefly/message.py`
+2. `$ nodemon --watch ./src/ --exec "poetry run broker" src/notefly/broker.py`
 
 otherwise:
 
 1. `$ poetry run client`
-2. `$ poetry run message`
+2. `$ poetry run broker`
 
 ## Specification
 
