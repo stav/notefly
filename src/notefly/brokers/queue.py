@@ -43,4 +43,3 @@ class QueueBroker:
                 yield x
         finally:
             self.connections.remove(connection)
-        print(16)

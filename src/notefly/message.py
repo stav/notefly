@@ -1,11 +1,8 @@
-import asyncio
 import json
 
 from functools import partial
 
-from typing import AsyncGenerator
-
-from quart import Quart, render_template, request
+from quart import Quart, request
 from quart_cors import cors
 
 from notefly.brokers import Broker
@@ -16,6 +13,7 @@ is_setup = False
 
 app = Quart(__name__)
 app = cors(app, allow_origin=CLIENT_URL)
+
 
 async def index(broker):
     global is_setup
@@ -32,6 +30,7 @@ async def index(broker):
 
     await broker.publish(message)
     return json.dumps(data)
+
 
 def run() -> None:
     broker = Broker()
