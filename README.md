@@ -34,7 +34,7 @@ or offline data processing.
 	$ poetry add quart quart-cors
 	$ poetry add --dev pytest-asyncio
 
-## Usage
+## Setup
 
 Start two (2) microservices:
 
@@ -47,6 +47,12 @@ otherwise:
 
 1. `$ poetry run client`
 2. `$ poetry run broker`
+
+## Usage
+
+Subscribe to messages at http://localhost:5001/sub
+
+Publish messages at http://localhost:5000/pub
 
 ## Specification
 
