@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import AsyncGenerator
 
 
-class Broker(ABC):
+class IBroker(ABC):
     """Broker interface."""
     @abstractmethod
     async def setup(self) -> None:

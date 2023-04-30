@@ -8,10 +8,10 @@ import asyncio
 
 from typing import AsyncGenerator
 
-from .interfaces import Broker
+from .interfaces import IBroker
 
 
-class QueueBroker(Broker):
+class QueueBroker(IBroker):
     def __init__(self) -> None:
         self.connections = set()
         print('init', self)

@@ -5,10 +5,10 @@ analytics, data integration, and mission-critical applications.
 """
 from typing import AsyncGenerator
 
-from .interfaces import Broker
+from .interfaces import IBroker
 
 
-class KafkaBroker(Broker):
+class KafkaBroker(IBroker):
     async def setup(self) -> None:
         pass
 

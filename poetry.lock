@@ -156,6 +156,21 @@ files = [
 ]
 
 [[package]]
+name = "injector"
+version = "0.20.1"
+description = "Injector - Python dependency injection framework, inspired by Guice"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "injector-0.20.1-py2.py3-none-any.whl", hash = "sha256:f8fc5994176a8cf6b0455a8d1558c588733474ef17795553464e7e9d2f94eaf5"},
+    {file = "injector-0.20.1.tar.gz", hash = "sha256:8661b49a2f8309ce61e3a6a82b7acb5e225c4bde8e17d1610c893a670dff223a"},
+]
+
+[package.extras]
+dev = ["black", "check-manifest", "dataclasses", "mypy", "pytest", "pytest-cov (>=2.5.1)"]
+
+[[package]]
 name = "itsdangerous"
 version = "2.1.2"
 description = "Safely pass data to untrusted environments and back."
@@ -369,6 +384,22 @@ files = [
 quart = ">=0.15"
 
 [[package]]
+name = "quart-injector"
+version = "0.0.0b1"
+description = ""
+category = "main"
+optional = false
+python-versions = ">=3.10,<4.0"
+files = [
+    {file = "quart-injector-0.0.0b1.tar.gz", hash = "sha256:5909726a7499aeb4c50961efb1902df08914b3e283df7e5b2822c9713e439200"},
+    {file = "quart_injector-0.0.0b1-py3-none-any.whl", hash = "sha256:4de9a3e22ac15785809270e4d2f4f86b56a15596edb024522b06b2de33cb7fdb"},
+]
+
+[package.dependencies]
+injector = ">=0.19.0,<1.0.0"
+quart = ">=0.17.0,<1.0.0"
+
+[[package]]
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
@@ -428,4 +459,4 @@ h11 = ">=0.9.0,<1"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "568abadfa3a9f53edc25844272b622ab6c5a589c94db21699a1137fe19c52bdf"
+content-hash = "139ce27c1b2f4e652bee5066194cf6123f0c4cd6c7ada9c5336ff527834ea780"
