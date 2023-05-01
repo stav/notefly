@@ -1,9 +1,10 @@
 import json
+import logging
 
 from quart import Quart, request
 from quart_cors import cors
-from dependency_injector.wiring import inject, Provide
 from dependency_injector import containers, providers
+from dependency_injector.wiring import inject, Provide
 
 from notefly import Broker
 from notefly.brokers.interfaces import IBroker
@@ -16,20 +17,23 @@ app = cors(app, allow_origin=CLIENT_URL)
 
 class Container(containers.DeclarativeContainer):
     wiring_config = containers.WiringConfiguration(modules=[".broker"])
+    loging_config = providers.Configuration(yaml_files=["./config.yml"])
     broker_service = providers.Singleton(Broker)
+
+    logging = providers.Resource(
+        logging.basicConfig,
+        level=loging_config.log.level,
+        format=loging_config.log.format,
+        filename=loging_config.log.filename,
+    )
 
 
 @app.post('/')
 @inject
 async def publish(broker: IBroker = Provide[Container.broker_service]) -> str:
-    print('publish', broker)
-
     data = dict(await request.form)
-    print('data', type(data), data)
-
     message = data['message']
-    print('message', message)
-
+    logging.getLogger('publishing').debug(message)
     await broker.publish(message)
     return json.dumps(data)
 
@@ -37,12 +41,16 @@ async def publish(broker: IBroker = Provide[Container.broker_service]) -> str:
 @app.get('/sub')
 @inject
 async def subscribe(broker: IBroker = Provide[Container.broker_service]) -> str:
-    print('setting up', broker)
+    logging.getLogger('settingup').debug(broker)
     app.add_background_task(broker.setup)
     return 'ok'
 
 
 def run() -> None:
-    print('Starting publish service')
     app.container = Container()
-    app.run(port=5001)
+    app.container.init_resources()
+    logging.info('Starting publish service')
+    try:
+        app.run(port=5001)
+    finally:
+        app.container.shutdown_resources()

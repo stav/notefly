@@ -1,0 +1,4 @@
+log:
+  level: "DEBUG"
+  format: "[%(asctime)s] [%(levelname)s] [%(name)s]: %(message)s"
+  filename: "notefly.log"

@@ -5,6 +5,7 @@ asyncio queues are not thread-safe, they are designed to be used specifically
 in async/await code.
 """
 import asyncio
+import logging
 
 from typing import AsyncGenerator
 
@@ -14,35 +15,30 @@ from .interfaces import IBroker
 class QueueBroker(IBroker):
     def __init__(self) -> None:
         self.connections = set()
-        print('init', self)
 
     def __str__(self):
         return f'{self.__class__.__name__} {id(self)} {self.__class__} {len(self.connections)} connections {self.connections}'
 
     async def setup(self) -> None:
-        print('setup', self)
-        # await asyncio.sleep(1)
+        logging.getLogger('setup').info(self)
         async for message in self.subscribe():
-            print(5, message)
-            # await websocket.send(message)
+            logging.getLogger('send').debug(f'"{message}"')
             await asyncio.sleep(1)
 
     async def publish(self, message: str) -> None:
-        print(10, message, self)
+        logging.getLogger('publish').debug(message)
         for connection in self.connections:
-            print(11, connection)
             await connection.put(message)
+            logging.getLogger('sending').debug(f'"{message}" to {connection}')
 
     async def subscribe(self) -> AsyncGenerator[str, None]:
         connection = asyncio.Queue()
-        print(12, connection, connection.qsize())
         self.connections.add(connection)
-        print(13, self)
+        logging.getLogger('subscribed').info(self)
         try:
             while True:
-                print(14)
-                x = await connection.get()
-                print(15, x)
-                yield x
+                message = await connection.get()
+                logging.getLogger('received').info(f'"{message}" for {connection}')
+                yield message
         finally:
             self.connections.remove(connection)
